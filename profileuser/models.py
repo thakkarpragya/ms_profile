@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
 class Profile(models.Model):
@@ -12,13 +12,13 @@ class Profile(models.Model):
     mobile = models.CharField(max_length=15)
     email = models.CharField(max_length=200)
     roleName = models.CharField(max_length=20)
-    yearOfJoining =  models.DateField()  
-    yearOfPassing =  models.DateField()  
-    skills = models.CharField(max_length=200)    
-    interests = models.CharField(max_length=200)
+    yearOfJoining =  models.DateField(null=True,blank=True)  
+    yearOfPassing =  models.DateField(null=True,blank=True)  
+    skills = models.CharField(max_length=1000)
+    interests = models.CharField(max_length=1000)
     linkedInProfile = models.CharField(max_length=100)
     yearsOfExperince = models.CharField(max_length=5)
-    expertise = models.CharField(max_length=200)  
+    expertise = models.CharField(max_length=1000)
    
     class Meta:
         """

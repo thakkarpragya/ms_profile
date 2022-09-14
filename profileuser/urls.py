@@ -7,7 +7,7 @@ urlpatterns = [
     path('api/masterEd',MasterEd.as_view()),
     path('api/workex',Workex.as_view()),   
     path('api/completeprofile',CompleteProfile.as_view()),
-    path('api/completeprofiledetails/<int:pk>',CompleteProfileDetails.as_view()),
+    path('api/completeprofiledetails/<pk>',CompleteProfileDetails.as_view()),
     path('api/filterprofile',FilterProfile.as_view()),
     path('api/thankyounotes',TyNotes.as_view()),
 ]

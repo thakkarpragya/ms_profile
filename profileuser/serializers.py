@@ -57,8 +57,8 @@ class TyNotesSerializer(serializers.ModelSerializer):
    
 class CompleteProfileSerializer(serializers.ModelSerializer):
     
-    higheredu = MasterEduSerializer(many=True)
-    workex = WorkExperienceSerializer(many=True)     
+    higheredu = MasterEduSerializer(many=True, required=False)
+    workex = WorkExperienceSerializer(many=True, required=False)     
     tyn = TyNotesSerializer(many=True, read_only=True)
     
     class Meta:
@@ -83,8 +83,17 @@ class CompleteProfileSerializer(serializers.ModelSerializer):
         )        
  
     def create(self, validated_data):
-        higheredu_data = validated_data.pop('higheredu')
-        workex_data = validated_data.pop('workex')   
+        if(validated_data.get('higheredu')):
+            higheredu_data = validated_data.pop('higheredu')
+        else:
+            higheredu_data = []
+        
+        if(validated_data.get('workex')):
+            workex_data = validated_data.pop('workex')   
+        else:
+            workex_data = []
+            
+        # workex_data = validated_data.pop('workex')   
         profile = Profile.objects.create(**validated_data)
         for higheredu_rec in higheredu_data:
             MasterEdu.objects.create(regId=profile,**higheredu_rec)                  
@@ -93,8 +102,15 @@ class CompleteProfileSerializer(serializers.ModelSerializer):
         return profile     
     
     def update(self, instance, validated_data):
-        higheredu_data = validated_data.pop('higheredu')
-        workex_data = validated_data.pop('workex')      
+        if(validated_data.get('higheredu')):
+            higheredu_data = validated_data.pop('higheredu')
+        else:
+            higheredu_data = []
+        
+        if(validated_data.get('workex')):
+            workex_data = validated_data.pop('workex')   
+        else:
+            workex_data = []      
         
         # Update profile details
         instance.regId = validated_data.get('regId', instance.regId)
