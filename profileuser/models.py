@@ -12,13 +12,13 @@ class Profile(models.Model):
     mobile = models.CharField(max_length=15)
     email = models.CharField(max_length=200)
     roleName = models.CharField(max_length=20)
-    yearOfJoining =  models.DateField(null=True,blank=True)  
-    yearOfPassing =  models.DateField(null=True,blank=True)  
+    yearOfJoining =  models.CharField(max_length=4,null=True,blank=True)  
+    yearOfPassing =  models.CharField(max_length=4,null=True,blank=True)  
     skills = models.CharField(max_length=1000)
     interests = models.CharField(max_length=1000)
-    linkedInProfile = models.CharField(max_length=100)
-    yearsOfExperince = models.CharField(max_length=5)
-    expertise = models.CharField(max_length=1000)
+    linkedInProfile = models.CharField(max_length=100,null=True,blank=True)
+    yearsOfExperince = models.CharField(max_length=5,null=True,blank=True)
+    expertise = models.CharField(max_length=1000,null=True,blank=True)
    
     class Meta:
         """
@@ -35,7 +35,7 @@ class MasterEdu(models.Model):
     regId = models.ForeignKey('Profile',related_name='higheredu',on_delete=models.CASCADE,null=True,blank=True)
     instituteName = models.CharField(max_length=100)
     mastersSubject = models.CharField(max_length=50)
-    yearOfCompletion = models.DateField()  
+    yearOfCompletion = models.CharField(max_length=4,null=True,blank=True)
    
     class Meta:
         """
@@ -52,8 +52,8 @@ class WorkExperience(models.Model):
     """
     regId = models.ForeignKey('Profile',related_name='workex',on_delete=models.CASCADE,null=True,blank=True)   
     company = models.CharField(max_length=100)
-    startYear = models.DateField()     
-    endYear = models.DateField()     
+    startYear = models.CharField(max_length=4,null=True,blank=True)
+    endYear = models.CharField(max_length=4,null=True,blank=True)
     designation = models.CharField(max_length=50)
     role = models.CharField(max_length=50)
            
