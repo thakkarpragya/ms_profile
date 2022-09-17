@@ -83,15 +83,9 @@ class CompleteProfileSerializer(serializers.ModelSerializer):
         )        
  
     def create(self, validated_data):
-        if(validated_data.get('higheredu')):
-            higheredu_data = validated_data.pop('higheredu')
-        else:
-            higheredu_data = []
-        
-        if(validated_data.get('workex')):
-            workex_data = validated_data.pop('workex')   
-        else:
-            workex_data = []
+        higheredu_data = validated_data.pop('higheredu')
+    
+        workex_data = validated_data.pop('workex')   
             
         # workex_data = validated_data.pop('workex')   
         profile = Profile.objects.create(**validated_data)
