@@ -95,16 +95,10 @@ class CompleteProfileSerializer(serializers.ModelSerializer):
             WorkExperience.objects.create(regId=profile,**workex_rec)    
         return profile     
     
-    def update(self, instance, validated_data):
-        if(validated_data.get('higheredu')):
-            higheredu_data = validated_data.pop('higheredu')
-        else:
-            higheredu_data = []
-        
-        if(validated_data.get('workex')):
-            workex_data = validated_data.pop('workex')   
-        else:
-            workex_data = []      
+    def update(self, instance, validated_data):  
+        higheredu_data = validated_data.pop('higheredu')                     
+
+        workex_data = validated_data.pop('workex')   
         
         # Update profile details
         instance.regId = validated_data.get('regId', instance.regId)
